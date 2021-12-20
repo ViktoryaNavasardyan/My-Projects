@@ -1,0 +1,179 @@
+#include <iostream>
+using namespace std;
+class BinSTree;
+class TreeNode
+{
+private:
+	TreeNode *left, *right;
+public:
+	int info;
+	TreeNode(const int &item, TreeNode *l = 0, TreeNode *r = 0) :
+		info(item), left(l), right(r) {}
+	TreeNode() {}
+	TreeNode *Left(void)const { return left; }
+	TreeNode *Right(void)const { return right; }
+	friend class BinSTree;
+};
+class BinSTree
+{
+private:
+	TreeNode *root;
+	void Insert(int, TreeNode*);
+	TreeNode* Search(int, TreeNode*);
+public:
+	BinSTree();
+	BinSTree(int *, int);
+	BinSTree(int, TreeNode* = 0, TreeNode* = 0);
+	~BinSTree();
+	void Insert(int);
+	TreeNode* Search(int);
+	TreeNode* Getroot();
+	int Getinfo(TreeNode* t);
+	
+	void PreOrder(TreeNode*, void visit(TreeNode *));
+};
+BinSTree::BinSTree()
+{
+	root = 0;
+}
+
+BinSTree::~BinSTree() {}
+
+void BinSTree::Insert(int v)
+{
+	if (root != 0)
+	{
+		Insert(v, root);
+	}
+	else
+	{
+		root = new TreeNode;
+		root->info = v;
+		root->left = 0;
+		root->right = 0;
+	}
+}
+
+void BinSTree::Insert(int v, TreeNode *n)
+{
+	if (n->info > v)
+	{
+		if (n->left != 0)
+		{
+			Insert(v, n->left);
+		}
+		else
+		{
+			n->left = new TreeNode;
+			n->left->info = v;
+			n->left->left = 0;
+			n->left->right = 0;
+		}
+	}
+	else
+	{
+		if (n->right != 0)
+		{
+			Insert(v, n->right);
+		}
+		else
+		{
+			n->right = new TreeNode;
+			n->right->info = v;
+			n->right->left = 0;
+			n->right->right = 0;
+		}
+	}
+}
+
+TreeNode * BinSTree::Search(int v, TreeNode *n)
+{
+	if (n != 0)
+	{
+		if (n->info == v)
+		{
+			return n;
+		}
+		else
+		{
+			if (n->info > v)
+			{
+				Search(v, n->left);
+			}
+			else
+			{
+				Search(v, n->right);
+			}
+		}
+	}
+	else    return 0;
+}
+
+TreeNode * BinSTree::Search(int v)
+{
+	return Search(v, root);
+}
+TreeNode * BinSTree::Getroot()
+{
+	return root;
+}
+
+
+int BinSTree::Getinfo(TreeNode *t)
+{
+	return t->info;
+}
+BinSTree::BinSTree(int *a, int n)
+{
+	root = NULL;
+	for (int i = 0; i<n; i++)
+	{
+		this->Insert(a[i]);
+	}
+}
+void BinSTree::PreOrder(TreeNode * t, void visit(TreeNode *a))
+{
+	if (t != NULL)
+	{
+		visit(t);
+		PreOrder(t->left, visit);
+		PreOrder(t->right, visit);
+	}
+}
+void outvis1(TreeNode *a)
+{
+	if (!a) return;
+	cout << a->info << " ";
+}
+
+//////////////////////////////////////////////////////////////
+
+int main()
+{
+	/*BinSTree a;
+	a.Insert(10);
+	a.Insert(8);
+	a.Insert(7);
+	a.Insert(6);
+	a.Insert(15);
+	a.Insert(12);
+	a.Insert(10);
+	a.Insert(14);
+	a.Insert(2);
+	a.Insert(1);
+	TreeNode* s=a.Getroot();
+	cout << a.Getinfo(s)<<endl;
+	a.PreOrder(s,outvis1);
+	cout << endl;
+	TreeNode* t = a.Search(2);
+	cout << t << endl;
+	cout <<"info="<< a.Getinfo(t) << endl; */
+	
+	int a[] = { 3,5,12,-7,0 };
+	BinSTree obj(a, 5);
+	TreeNode *t = obj.Getroot();
+	obj.PreOrder(t, outvis1);
+		cout << endl;
+	system("pause");
+	return 0;
+}

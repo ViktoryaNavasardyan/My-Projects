@@ -1,0 +1,50 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <cstring>
+#include <stdio.h>
+#include "student.h"
+using namespace std;
+
+student::student(const char* n, const char* m, int a[])
+	:person(n,m)
+{
+	if (a != NULL) {
+		for (int i = 0; i < 4; i++) {
+			q[i] = a[i];
+		}
+	}
+}
+
+int student::mijin() const
+{
+	int sum = 0;
+	for (int i = 0; i < 4; i++) {
+		sum += q[i];
+	}
+	return sum / 4;
+}
+
+void student::print() const
+{
+	person::print();
+	cout << "gnahatakannery -> ";
+	for (int i = 0; i < 4; i++)
+		cout << q[i] << ' ';
+	cout << endl;
+
+}
+istream& operator>>(istream& in, student& s)
+{
+	if (s.first_name == NULL) {
+		s.first_name = new char[80];
+	}
+	in.getline(s.first_name, 80, '\n');
+	if (s.second_name == NULL) {
+		s.second_name = new char[80];
+	}
+	in.getline(s.second_name, 80, '\n');
+	for (int i = 0; i < 4; i++)
+		in >> s.q[i];
+	in.get();
+	return in;
+}

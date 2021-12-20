@@ -1,0 +1,26 @@
+#ifndef STUDENT_H
+#define STUDENT_H
+#include <iostream>
+#include "person.h"
+using namespace std;
+
+
+class Student :public Person
+{
+	friend ostream& operator<<(ostream& o, const Student& s);
+	friend istream& operator>>(istream& in, Student& s);
+
+public:
+	Student(const char* first = NULL,const char* second = NULL, int xumb=0, int mrcuyt=0);
+	Student(const Student& s);
+	void print() const;
+	int get_xumb() { return xumb; }
+	int get_mrcuyt() { return mrcuyt; }
+	char* get_name() { return first_name; }
+	char* get_secname() { return second_name; }
+private:
+	int xumb;
+	int mrcuyt;
+};
+
+#endif

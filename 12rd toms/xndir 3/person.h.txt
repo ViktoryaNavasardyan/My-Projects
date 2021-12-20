@@ -1,0 +1,16 @@
+#ifndef PERSON_H
+#define PERSON_H
+#include <iostream>
+using namespace std;
+
+class person
+{
+public:
+	person(const char* n = NULL,const char* m = NULL);//long-y erkar int;
+	virtual void print() const;
+	~person();
+protected:
+	char* first_name = NULL;
+	char* second_name = NULL;
+};
+#endif

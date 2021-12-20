@@ -1,0 +1,75 @@
+#include <iostream>
+#include <cstring>
+#include <stdio.h>
+using namespace std;
+
+bool parz(int x)
+{
+	if (x == 2)
+		return true;
+	if (x % 2 == 0 || x==1)
+		return false;
+	for (int i = 3; i <= x / 2; i++) {
+		if (x % i == 0)
+			return false;
+	}
+	return true;
+}
+
+int main()
+{
+	//nermucel
+	int n, m;
+	cin >> n >> m;
+	int** a = new int* [n];
+	for (int i = 0; i < n; i++) {
+		a[i] = new int[m];
+		for (int j = 0; j < m; j++)
+			cin >> a[i][j];
+	}
+
+	int* b = new int[n];
+	for (int i = 0; i < n; i++)
+		b[i] = 0;
+	int count;
+	for (int i = 0; i < n; i++) {
+		count = 0;
+		for (int j = 0; j < m; j++) {
+			if (parz(a[i][j]))
+				b[i] = ++count;
+		}
+	}
+	cout << endl;
+
+	for (int i = 0; i < n; i++)
+		cout << b[i] << ' ';
+
+	cout << endl;
+
+	bool flag;
+	for (int i = 0; i < n; i++) {
+		flag = true;
+		for (int j = 0; j < n -1 - i; j++) {
+			if (b[j] > b[j + 1]) {
+				swap(a[j], a[j + 1]);
+				swap(b[j], b[j + 1]);
+				flag = false;
+			}
+		}
+		if (flag)
+			break;
+	}
+
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++)
+			cout << a[i][j] << ' ';
+		cout <<"->"<<b[i]<< endl;
+	}
+
+	//jnjel
+	for (int i = 0; i < n; i++)
+		delete[] a[i];
+	delete[] a;
+	delete[] b;
+	return 0;
+}

@@ -1,0 +1,59 @@
+#include <cstring>
+#include <stdio.h>
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	int n;
+	const int m = 11;
+	cin >> n;
+	while (n > 100) {
+		cout << "nermucel 100ic poqr tiv" << endl;
+		cin >> n;
+	}
+	char** a = new char* [n];
+	for (int i = 0; i < n; i++) {
+		a[i] = new char[m];
+		cin >> a[i];
+		while (strlen(a[i]) > m) {
+			cout << "nermucel 10y chgerazancox erk. unecox bar" << endl;
+			cin >> a[i];
+		}
+	}
+	if (strcmp(a[0], a[1]) < 0) {
+		for (int i = 1; i < n - 1; i++) {
+			if (strcmp(a[i], a[i + 1]) >= 0) {
+				cout << "missed" << endl;
+				//jnjel
+				for (int i = 0; i < n; i++)
+					delete[] a[i];
+				delete[] a;
+				return 0;
+			}
+		}
+		cout << "increasing" << endl;
+		//jnjel
+	 for (int i = 0; i < n; i++)
+		 delete[] a[i];
+	 delete[] a;
+		return 0;
+	}
+	else
+		for (int i = 0; i < n - 1; i++) {
+			if (strcmp(a[i], a[i + 1]) <= 0) {
+				cout << "missed" << endl;
+				//jnjel
+				for (int i = 0; i < n; i++)
+					delete[] a[i];
+				delete[] a;
+				return 0;
+			}
+		}
+	 cout << "increasing" << endl;
+	 //jnjel
+	 for (int i = 0; i < n; i++)
+		 delete[] a[i];
+	 delete[] a;
+	return 0;
+}

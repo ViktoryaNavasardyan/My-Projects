@@ -1,0 +1,33 @@
+#include <cstring>
+#include <stdio.h>
+#include <iostream>
+#include "matrix90.h"
+using namespace std;
+
+int main()
+{
+	int u = 0;
+	int w;
+	const int n = 5;
+	matrix90 a[n];
+	for (int i = 0; i < n; i++)
+		cin >> a[i];
+
+	bool b[n];
+	for (int i = 0; i < n; i++)
+		b[i] = false;
+
+	for (int i = 0; i < n; i++) {
+		if (b[i] == false) {
+			for (int j = i + 1; j < n; j++)
+				if (a[i].nman(a[j])) {
+					b[j] = true;
+				}
+			u++;
+		}
+	}
+
+	cout << u << endl;
+	return 0;
+}
+

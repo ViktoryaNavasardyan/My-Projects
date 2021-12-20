@@ -1,0 +1,66 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <cstring>
+#include <stdio.h>
+using namespace std;
+
+bool is_2iast(int x)
+{
+	if (x < 1)
+		return false;
+	while (x > 2) {
+		if (x % 2 == 1)
+			return false;
+		x /= 2;
+	}
+	return true;
+}
+
+int main()
+{
+	//nermucel
+	int n, m;
+	cin >> n >> m;
+	int** a = new int* [n];
+	for (int i = 0; i < n; i++) {
+		a[i] = new int[m];
+		for (int j = 0; j < m; j++)
+ 			cin >> a[i][j];
+	}
+	int count = 0;
+	int* b = new int[n];
+	for (int i = 0; i < n; i++)
+		b[i] = 0;
+	for (int i = 0; i < n; i++) {
+		count = 0;
+		for (int j = 0; j < m; j++) {
+			if (is_2iast(a[i][j]))
+				count++;
+		}
+		if (count == 3)
+			b[i] = 1;
+	}
+	int q = 0;
+	for (int i = 0; i < n; i++) {
+		if (b[i] == 1) {
+			for (int j = i-q; j < n-1-q; j++) {
+				swap(a[j], a[j + 1]);
+			}
+			q++;
+		}
+	}
+	cout << endl;
+	for (int i = 0; i < n-q; i++) {
+		for (int j = 0; j < m; j++)
+			cout << a[i][j] << ' ';
+		cout << endl;
+	}
+
+	//jnjel
+	for (int i = 0; i < n; i++)
+		delete[] a[i];
+	delete[] a;
+
+
+
+}

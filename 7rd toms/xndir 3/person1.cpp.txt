@@ -1,0 +1,43 @@
+#include <iostream>
+#include "person.h"
+#include <cstring>
+using namespace std;
+
+void Person::init(const char* x, const char* y)
+{
+	if (x != 0) {
+		int lenght = strlen(x);
+		first_name = new  char[lenght + 1];
+		strcpy_s(first_name, lenght + 1, x);
+	}
+	if (y != 0) {
+		int lenght = strlen(y);
+		second_name = new char[lenght + 1];
+		strcpy_s(second_name, lenght + 1, y);
+	}
+}
+
+Person::Person(const char* f,const char* s)
+{
+	init(f, s);
+}
+
+Person& Person::operator=(const Person& p)
+{
+	
+	init(p.first_name, p.second_name);
+	return *this;
+}
+
+void Person::print() const
+{
+	cout << "name is " << first_name << endl <<
+		"surname is " << second_name << endl;
+
+}
+
+Person::~Person()
+{
+	delete[] first_name;
+	delete[] second_name;
+}

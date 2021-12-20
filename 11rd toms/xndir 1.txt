@@ -1,0 +1,59 @@
+#include <cstring>
+#include <stdio.h>
+#include <iostream>
+using namespace std;
+
+bool is_simetric(int num)
+{
+	int reverse = 0;
+	int num1 = num;
+	while (num > 0) {
+		reverse = reverse * 10 + num % 10;
+		num = num / 10;
+	}
+	return (num1 == reverse);
+}
+
+int main()
+{
+	//nermucel
+	int n, m;
+	cin >> n >> m;
+	int** a = new int* [n];
+	for (int i = 0; i < n; i++) {
+		a[i] = new int[m];
+		for (int j = 0; j < m; j++)
+			cin >> a[i][j];
+	}
+	cout << endl;
+	int k;
+	int* b = new int[n];
+	int q = 0;
+	for (int i = 0; i < n; i++) {
+		k = 0;
+		for (int j = 0; j < m; j++) {
+			if (is_simetric(a[i][j]))
+				k++;
+		}
+		if (k == 2)
+			b[q++] = i;
+	}
+	for (int i = 0; i < q; i++) {
+		for (int j = b[i] - i; j < n - 1 - i; j++) {
+			swap(a[j], a[j + 1]);
+		}
+	}
+
+	for (int i = 0; i < n - q; i++) {
+		for (int j = 0; j < m; j++) {
+			cout << a[i][j] << ' ';
+		}
+		cout << endl;
+	}
+
+	//jnjel
+	delete[] b;
+	for (int i = 0; i < n; i++)
+		delete[] a[i];
+	delete[] a;
+}

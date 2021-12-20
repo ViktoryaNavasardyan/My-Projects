@@ -1,0 +1,41 @@
+/*erkkap ciklik cucakic heracnel trvac tarry parunakox bolor hangycnery*/
+
+#include "list.h"
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	List L1;
+	int size;
+	cout << "nermucel L1i tarreri qanaky" << endl;
+	cin >> size;
+	cout << "nermucel L1i tarrery" << endl;
+	for (int i = 0; i < size; i++) {
+		int item;
+		cin >> item;
+		L1.InsertAt(i, item);
+	}
+	cout << "L1 = "; L1.print();
+	//L1.ClearList();
+	//cout << "Clear L1 = "; L1.print();
+	int item;
+	cout << "nermucel heracvox tivy" << endl;
+	cin >> item;
+	List L2;
+	int j = 0;
+	for (int i = 0; i < size; i++) {
+		if (L1.GetData(L1.GetNode(i)) != item) {
+			L2.InsertAt(j, L1.GetData(L1.GetNode(i)));
+			j++;
+		}
+	}
+	L1.ClearList();
+	cout << "Clear L1 = "; L1.print();
+	for (int i = 0; i < j; i++) {
+		L1.InsertAt(i, L2.GetData(L2.GetNode(i)));
+	}
+	cout << "New L1 = "; L1.print();
+	cout << endl;
+	return 0;
+}

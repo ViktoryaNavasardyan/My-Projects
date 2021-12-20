@@ -1,0 +1,25 @@
+#include <iostream>
+#include <cstring>
+#include <stdio.h>
+#include "student.h"
+using namespace std;
+
+int main()
+{
+	const int n = 5;
+	student s[n];
+	int sum = 0;
+	for (int i = 0; i < n; i++) {
+		cin >> s[i];
+		sum += s[i].mijin();
+	}
+
+	for (int i = 0; i < n; i++) {
+		if (s[i].mijin() > sum / n) {
+			s[i].print();
+			cout << endl;
+		}
+	}
+
+	return 0;
+}

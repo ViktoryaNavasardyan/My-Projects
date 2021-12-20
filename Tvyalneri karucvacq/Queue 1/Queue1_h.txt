@@ -1,0 +1,66 @@
+#pragma once
+#include <iostream>
+using namespace std;
+
+const int MaxSize = 50;
+typedef int DataType;
+
+class MyQueue
+{
+private:
+	int count;
+	int front;
+	int rear;
+	DataType a[MaxSize];
+public:
+	MyQueue();
+	DataType Pop();
+	void Push(const DataType& item);
+	void Clear() { count = rear = front = 0; }
+	bool IsEmpty() const { return (!count); }
+	bool IsFull() const{ return (count == MaxSize); }
+	int GetLenght(){ return count; }
+	int GetFront(){return a[front]; }
+	void Print();
+};
+
+MyQueue::MyQueue() : rear(0), front(0), count(0) , a{0}{}
+
+void MyQueue::Push(const DataType& item)
+{
+	if (IsFull()) {
+		cerr << "Queue is full!" << endl;
+		exit(1);
+	}
+	else {
+		a[rear] = item;
+		rear = (rear + 1) % MaxSize;
+		++count;
+	}
+}
+DataType MyQueue::Pop()
+{
+	if (IsEmpty()) {
+		cerr << "Queue is empty !" << endl;
+		exit(1);
+	}
+	else {
+		DataType temp = a[front];
+		--count;
+		front = (front + 1) % MaxSize;
+		return temp;
+	}
+}
+
+void MyQueue::Print()
+{
+	int c; c = count;
+	int f; f = front;
+	while (c)
+	{
+		cout << a[f] << " ";
+		f = (f + 1) % MaxSize;
+		c = c - 1;
+	}
+}
+

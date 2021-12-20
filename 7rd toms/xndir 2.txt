@@ -1,0 +1,45 @@
+#include <iostream>
+#include <cstring>
+#include <stdio.h>
+using namespace std;
+
+int main()
+{
+	int n;
+	const int m = 11;
+	cin >> n;
+	while (n > 100) {
+		cout << "nermucel 100ic poqr tiv" << endl;
+		cin >> n;
+	}
+	char** a = new char* [n];
+	for (int i = 0; i < n; i++) {
+		a[i] = new char[m];
+		cin >> a[i];
+		while (strlen(a[i]) > m) {
+			cout << "nermucel 10y chgerazancox erk. unecox bar" << endl;
+			cin >> a[i];
+		}
+	}
+	cout << endl << "nermucel k" << endl;
+	int k; cin >> k;
+	char* min = NULL;
+	for (int i = 0; i < n; i++) {
+		if (strlen(a[i]) % k == 0) {
+			if (min == NULL)
+				min = a[i];
+			else if (strcmp(a[i], min) < 0)
+				min = a[i];
+		}
+	}
+	if (min == NULL) {
+		cout << "aydpisi tarr chka" << endl;
+		return 0;
+	}
+	cout << min;
+	//jnjel
+	for (int i = 0; i < n; i++)
+		delete[] a[i];
+	delete[] a;
+	return 0;
+}

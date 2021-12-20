@@ -1,0 +1,63 @@
+#include <iostream>
+#include <cstring>
+#include <stdio.h>
+using namespace std;
+
+bool is_seven(int a)
+{
+	if(a<0)
+		a *= -1;
+	while (a != 0){
+		if (a % 8 == 7)
+			return true;
+		a = a / 8;
+	}
+	return false;
+}
+
+int main()
+{
+	//nermucel
+	int n, m;
+	cin >> n >> m;
+	int** a = new int* [n];
+	for (int i = 0; i < n; i++) {
+		a[i] = new int[m];
+		for (int j = 0; j < m; j++)
+			cin >> a[i][j];
+	}
+
+	cout << endl;
+	int* b = new int[n];
+	int k = 0;
+	bool flag;
+	for (int i = 0; i < n; i++) {
+		flag = true;
+		for (int j = 0; j < m; j++) {
+			if (!is_seven(a[i][j])) {
+				flag = false;
+				break;
+			}
+		}
+		if (flag)
+			b[k++] = i;
+	}
+
+	for (int i = 0; i < k; i++) {
+		for (int j = b[i] - i; j < n - 1 - i; j++) {
+			swap(a[j], a[j + 1]);
+		}
+	}
+
+	for (int i = 0; i < n-k ; i++) {
+		for (int j = 0; j < m; j++) {
+			cout << a[i][j] << ' ';
+		}
+		cout << endl;
+	}
+
+	//jnjel
+	for (int i = 0; i < n; i++)
+		delete[] a[i];
+	delete[] a;
+}

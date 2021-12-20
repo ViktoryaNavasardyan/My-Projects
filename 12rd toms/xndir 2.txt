@@ -1,0 +1,52 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <string.h>
+#include <stdio.h>
+#include <iostream>
+using namespace std;
+
+int  main() 
+{
+	int n;
+	const int m = 11;
+	cin >> n;
+	while (n > 100) {
+		cout << "nermucel 100ic poqr tiv" << endl;
+		cin >> n;
+	}
+	char** a = new char* [n];
+	for (int i = 0; i < n; i++) {
+		a[i] = new char[m];
+		cin >> a[i];
+		while (strlen(a[i]) > m) {
+			cout << "nermucel 10y chgerazancox erk. unecox bar" << endl;
+			cin >> a[i];
+		}
+	}
+
+	char min1[m];
+	strcpy(min1, a[0]);
+	int index1 = 0;
+	for (int i = 1; i < n; i++) {
+		if (strlen(a[i]) < strlen(min1) ){
+			strcpy(min1, a[i]);
+			index1 = i;
+		}
+	}
+	char min2[m+1]="aaaaaaaaaaa";
+	int index2;
+	for (int i = 0; i < n; i++) {
+		if (i == index1)
+			continue;
+		if (strlen(a[i]) < strlen(min2)) {
+			strcpy(min2, a[i]);
+			index2 = i;
+		}
+	}
+	cout <<"index1= "<<index1<<" "<<min1<< endl<<
+		"index2 = "<<index2<<" " << min2 << endl;
+
+	for (int i = 0; i < n; i++)
+		delete[] a[i];
+	delete[] a;
+	return 0;
+}

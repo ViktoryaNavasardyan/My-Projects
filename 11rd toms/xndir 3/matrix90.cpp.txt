@@ -1,0 +1,130 @@
+#include "matrix90.h"
+#include <iostream>
+using namespace std;
+
+matrix90::matrix90(int p)
+{	
+	n = 0;
+	if (p != 0) {
+		n = p;
+		x = new int* [n];
+		for (int i = 0; i < n; i++)
+			x[i] = new int[n];
+	}	
+}
+matrix90::matrix90(const matrix90& m)
+{
+	if (x != 0) {
+		for (int i = 0; i < n; i++)
+			delete[] x[i];
+		delete[] x;
+	}
+	n = m.n;
+	x = new int* [m.n];
+	for (int i = 0; i < n; i++) {
+		x[i] = new int[n];
+		for (int j = 0; j < n; j++) {
+			x[i][j]= m.x[i][j];
+		}
+	}
+}
+
+matrix90::~matrix90()
+{
+	for (int i = 0; i < n; i++) 
+		delete[] x[i];
+	delete[] x;
+}
+
+bool matrix90::operator==(const matrix90& m)
+{
+	if (n != m.n)
+		return false;
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			if (x[i][j] != m.x[i][j])
+				return false;
+		}
+	}
+	return true;
+}
+istream& operator>>(istream& in, matrix90& m)
+{
+	if (m.x != NULL) {
+		for (int i = 0; i < m.n; i++)
+			delete[] m.x[i];
+		delete[] m.x;
+	}
+	in >> m.n;
+	m.x = new int*[m.n];
+	for (int i = 0; i < m.n; i++) {
+		m.x[i] = new int[m.n];
+		for (int j = 0; j < m.n; j++) {
+			 in >> m.x[i][j];
+		}
+	}
+	return in;
+}
+
+ostream& operator<<(ostream& out, const matrix90& q)
+{
+	for (int i = 0; i < q.n; i++) {
+		for (int j = 0; i < q.n; j++)
+			out << q.x[i][j] << ' ';
+		cout << endl;
+	}
+	return out;
+}
+
+void matrix90::rotate90()
+{
+	int** r = new int* [n];
+	for (int i = 0; i < n; i++) {
+		r[i] = new int[n];
+		for (int j = 0; j < n; j++) {
+			r[i][j] = x[i][j];
+		}
+	}
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			x[i][j] = r[n - 1 - j][i];
+		}
+	}
+	for (int i = 0; i < n; i++)
+		delete[] r[i];
+	delete[] r;
+
+}
+
+bool matrix90::nman(const matrix90& z)
+{
+	matrix90 v(z);
+	int s = 0;
+	while (s != 3) {
+		if (v == *this)
+			return true;
+		v.rotate90();
+		s++;
+	}
+	return false;
+}
+
+matrix90& matrix90::operator=(const matrix90& q) {
+	if (q.n != 0) {
+		n = q.n;
+		if (x != 0) {
+			for (int i = 0; i < n; i++)
+				delete[] x[i];
+			delete[] x;
+		}
+		x = new int* [n];
+		for (int i = 0; i < n; i++) {
+			x[i] = new int[n];
+			for (int j = 0; j < n; j++)
+				x[i][j] = q.x[i][j];
+		}
+	}
+	else 
+		*this = NULL;
+	return *this;
+}

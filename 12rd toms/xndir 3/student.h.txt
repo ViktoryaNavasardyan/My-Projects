@@ -1,0 +1,17 @@
+#ifndef STUDENT_H
+#define STUDENT_H
+#include <iostream>
+using namespace std;
+#include "person.h"
+
+class student : public person
+{
+	friend istream& operator>>(istream& in, student& s);
+public:
+	student(const char* n = NULL, const char* m = NULL, int a[] = { 0 });
+	int mijin() const;
+	virtual void print() const;
+private:
+	int q[4] = { 0 };
+};
+#endif

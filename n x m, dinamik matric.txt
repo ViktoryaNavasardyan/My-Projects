@@ -1,0 +1,23 @@
+//nermucel
+int n, m;
+cin >> n >> m;
+int** a = new int* [n];
+for (int i = 0; i < n; i++){
+	a[i] = new int[m]; 
+	for (int j = 0; j < m; j++) 
+		cin >> a[i][j];
+}
+
+//tpel
+for (int i = 0; i < n; i++) {
+	for (int j = 0; j < m; j++)
+		cout << a[i][j] << ' ';
+	cout << endl;
+}
+
+//jnjel
+for (int i = 0; i < n; i++)
+	delete[] a[i];
+delete[] a;
+
+

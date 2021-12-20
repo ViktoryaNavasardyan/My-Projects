@@ -1,0 +1,11 @@
+bool y_ic_mec(int x, int y)
+{
+	if (x < 0)
+		x *= -1;
+	while (x != 0) {
+		if ((x % 10) > y)
+			return false;
+		x = x / 10;
+	}
+	return true;
+}

@@ -1,0 +1,51 @@
+/*Trvac en Q1 ev Q2.Karucel Q3 hertery
+vori mej mekumej drvum en Q1 ev Q2 herteri tarrery,
+isk verjum chdatarkvac herti tarrery*/
+#include <iostream>
+#include "Queue_1.h"
+using namespace std;
+
+int main()
+{
+	MyQueue Q1;
+	int size1;
+	cout << "enter size" << endl;
+	cin >> size1;
+	cout << "enter members" << endl;
+	for (int i = 0; i < size1; i++) {
+		int member;
+		cin >> member;
+		Q1.Push(member);
+	}
+	
+	MyQueue Q2;
+	int size2;
+	cout << "enter size" << endl;
+	cin >> size2;
+	cout << "enter members" << endl;
+	for (int i = 0; i < size2; i++) {
+		int member;
+		cin >> member;
+		Q2.Push(member);
+	}
+	cout << "Q1 = ";  Q1.Print(); cout << endl;
+	cout << "Q2 = ";  Q2.Print(); cout << endl;
+	MyQueue Q3;
+
+	int maxsize;
+	maxsize = (size1 < size2) ? size2 : size1;
+	for (int i = 0; i < maxsize; i++) {
+		if (!Q1.IsEmpty()) {
+			Q3.Push(Q1.GetFront());
+			Q1.Pop();
+		}
+		if (!Q2.IsEmpty()) {
+			Q3.Push(Q2.GetFront());
+			Q2.Pop();
+		}
+	}
+	cout << "Q3 = ";  Q3.Print(); cout << endl;
+
+    cout << endl;
+	return 0;
+}

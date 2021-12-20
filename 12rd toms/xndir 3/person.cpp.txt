@@ -1,0 +1,40 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <cstring>
+#include <stdio.h>
+#include "person.h"
+using namespace std;
+
+person::person(const char* n,const char* m)
+{
+	if (n != NULL) {
+		first_name = new char[strlen(n)+1];
+		strcpy(first_name, n);
+	}
+	if (m != NULL) {
+		second_name = new char[strlen(m)+1];
+		strcpy(second_name, m);
+	}
+}
+
+person::~person()
+{
+	if(first_name!=NULL)
+		delete[] first_name;
+	if(second_name!=NULL)
+		delete[] second_name;
+}
+
+void person::print() const
+{
+	if (first_name == NULL)
+		cout << "Name is " << "----" << endl;
+	else
+		cout << "Name is " << first_name << endl;
+
+	if (second_name == NULL)
+		cout << "Second name is " << "----" << endl;
+	else 
+		cout << "Second name is " << second_name << endl;
+
+}

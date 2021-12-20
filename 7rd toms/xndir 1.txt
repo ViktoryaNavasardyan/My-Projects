@@ -1,0 +1,66 @@
+#include <iostream>
+#include <cstring>
+#include <stdio.h>
+using namespace std;
+
+bool y_ic_mec(int x, int y)
+{
+	if (x < 0)
+		x *= -1;
+	while (x != 0) {
+		if ((x % 10) > y)
+			return false;
+		x = x / 10;
+	}
+	return true;
+}
+
+int sum(int arr[], int m)
+{
+	int answer = 0;
+	for (int i = 0; i < m; i++)
+		if (y_ic_mec(arr[i], 6))
+			answer += arr[i];
+	return answer;
+
+}
+
+int main()
+{
+	//nermucel
+	int n, m;
+	cin >> n >> m;
+	int** a = new int* [n];
+	
+		
+	for (int i = 0; i < n; i++) {
+		a[i] = new int[m]; 
+		for (int j = 0; j < m; j++)
+			cin >> a[i][j];
+	}
+	//sort
+	bool flag;
+	for (int i = 0; i < n; i++) {
+		flag = true;
+		for (int j = 0; j < n - 1 - i; j++)
+			if (sum(a[j],m) > sum(a[j + 1],m)) {
+				swap(a[j], a[j + 1]);
+				flag = false;
+			}
+		if (flag)
+			break;
+	}
+	//tpel
+	cout << endl;
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++)
+			cout << a[i][j] << ' ';
+		cout <<"-->"<< sum(a[i],m) << endl;
+	}
+
+	for (int i = 0; i < n; i++)
+		delete[] a[i];
+	delete[] a;
+
+	return 0;
+}

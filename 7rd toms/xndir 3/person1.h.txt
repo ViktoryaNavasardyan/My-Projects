@@ -1,0 +1,18 @@
+#ifndef PERSON_H
+#define PERSON_H
+#include <iostream>
+using namespace std;
+class Person
+{
+public:
+	Person(const char* f = NULL,const char* s = NULL);
+	Person& operator =(const Person& p);
+	void print() const;
+	~Person();
+	void init(const char* x, const char* y);
+protected:
+	char* first_name = NULL; 
+	char* second_name = NULL;
+};
+
+#endif

@@ -1,0 +1,25 @@
+#ifndef MMATRIX90_H
+#define MMATRIX90_H
+#include <iostream>
+using namespace std;
+
+class matrix90
+{
+	friend istream& operator>>(istream& in, matrix90& m);
+	friend ostream& operator<<(ostream& out, const matrix90& q);
+public:
+	matrix90(int p = 0);
+	matrix90(const matrix90& mat);
+	~matrix90();
+	bool operator==(const matrix90& m);
+	matrix90& operator=(const matrix90& q);
+	void rotate90();
+	int get_n() { return n; };
+	bool nman(const matrix90& z);
+private:
+	int n;
+	int** x = NULL;
+
+};
+#endif // !MMATRIX90
+
